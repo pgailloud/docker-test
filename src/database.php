@@ -1,5 +1,6 @@
 <?php
 
+error_reporting(E_ALL);
 // Read the database connection parameters from environment variables
 $db_host = getenv('DB_HOST');
 $db_name = getenv('DB_NAME');
