@@ -25,11 +25,18 @@ jobs:
           target: test
           load: true
       - 
-        name: Build and push
+        name: Build and push prod
         uses: docker/build-push-action@v6
         with:
           platforms: linux/amd64, linux/arm64
           push: true
           target: final
           tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
-      
+      - 
+        name: Build and push dev
+        uses: docker/build-push-action@v6
+        with:
+          platforms: linux/amd64, linux/arm64
+          push: true
+          target: development
+          tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}-dev:latest
