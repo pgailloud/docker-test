@@ -1,7 +1,7 @@
 <?php
 
 error_reporting(E_ALL);
-echo "version 3";
+echo "version 4";
 // Read the database connection parameters from environment variables
 $db_host = getenv('DB_HOST');
 $db_name = getenv('DB_NAME');
@@ -9,9 +9,9 @@ $db_user = getenv('DB_USER');
 $db_pass = getenv('DB_PASS');
 
 echo "DB_HOST -> $db_host";
-echo "DB_NAME -> $db_name";
-echo "DB_USER -> $db_user";
-echo "DB_PASS -> $db_pass";
+echo "/ DB_NAME -> $db_name";
+echo "/ DB_USER -> $db_user";
+echo "/ DB_PASS -> $db_pass";
 
 // Create a new PDO instance
 $db_handle = new PDO("mysql:host=$db_host;dbname=$db_name", $db_user, $db_pass);
