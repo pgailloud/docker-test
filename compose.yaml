@@ -25,16 +25,10 @@ services:
       db:
         condition: service_healthy
     environment:
-      - PASSWORD_FILE_PATH=/run/secrets/db-password
       - DB_HOST=db
       - DB_NAME=example
       - DB_USER=root
       - DB_PASS=example
-    develop:
-      watch:
-        - action: sync
-          path: ./src
-          target: /var/www/html
   db:
     image: mariadb
     restart: always
