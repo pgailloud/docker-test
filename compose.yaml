@@ -8,6 +8,23 @@
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
 services:
+  
+  db:
+    image: mariadb
+    restart: always
+    user: root
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      - MARIADB_ROOT_PASSWORD=example
+      - MARIADB_DATABASE=example
+    expose:
+      - 3306
+    healthcheck:
+      test:  ["CMD", "/usr/local/bin/healthcheck.sh", "--su-mysql", "--connect",  "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
   server:
     build:
       context: .
@@ -29,22 +46,6 @@ services:
       - DB_NAME=example
       - DB_USER=root
       - DB_PASS=example
-  db:
-    image: mariadb
-    restart: always
-    user: root
-    volumes:
-      - db-data:/var/lib/mysql
-    environment:
-      - MARIADB_ROOT_PASSWORD=example
-      - MARIADB_DATABASE=example
-    expose:
-      - 3306
-    healthcheck:
-      test:  ["CMD", "/usr/local/bin/healthcheck.sh", "--su-mysql", "--connect",  "--innodb_initialized"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
   phpmyadmin:
     image: phpmyadmin
     ports:
@@ -53,6 +54,7 @@ services:
       - db
     environment:
       - PMA_HOST=db
+
 volumes:
   db-data:
 
